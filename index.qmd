@@ -1,6 +1,6 @@
 ---
-title: "Rozmieszczenie ludności w m. Konin i powiecie konińskim"
-#author: "Adam Olejniczak"
+title: Region Konin
+logo: data/coa.png
 format: 
   dashboard:
     theme: lux
@@ -54,7 +54,7 @@ bbox = gminy %>%
 
 ```
 
-# Mapa {orientation="rows" scrolling="false"}
+# Rozmieszczenie ludności {orientation="rows" scrolling="false"}
 
 ## Row {.tabset}
 
@@ -73,7 +73,6 @@ grid_2021 %>%
               fillColor = ~col,
               fillOpacity = 0.6,
               label = ~paste0(round(ludn_grid, 1), " os."),
-              popup = ~paste0(round(ludn_grid, 1), " os."),
               highlightOptions = highlightOptions(bringToFront = TRUE,
                                                   weight = 0.4)) %>%
   addPolygons(data = gminy,
@@ -82,8 +81,11 @@ grid_2021 %>%
               opacity = 1,
               weight = 1) %>%
   addLegend(colors = rev(pal),
-            labels = c("3 – 17", "17 - 77", "77 – 209", "209 – 458", "458 – 881"),
-            title = "Estymowana liczba ludności") %>%
+            labels = c("3 – 17", "17 - 77", "77 – 209", "209 – 458", 
+                       paste("458 –", round(max(grid_2021$ludn_grid), 0))
+                       ),
+            title = "Estymowana liczba ludności",
+            position = "bottomright") %>%
   fitBounds(bbox[1], bbox[2], bbox[3], bbox[4])
 ```
 
@@ -102,7 +104,6 @@ grid_2011 %>%
               fillColor = ~col,
               fillOpacity = 0.6,
               label = ~paste0(round(ludn_grid_2011, 1), " os."),
-              popup = ~paste0(round(ludn_grid_2011, 1), " os."),
               highlightOptions = highlightOptions(bringToFront = TRUE,
                                                   weight = 0.4)) %>%
   addPolygons(data = gminy,
@@ -111,15 +112,17 @@ grid_2011 %>%
               opacity = 1,
               weight = 1) %>%
   addLegend(colors = rev(pal),
-            labels = c("3 – 17", "17 - 77", "77 – 209", "209 – 458", "458 – 1004"),
-            title = "Estymowana liczba ludności") %>%
+            labels = c("3 – 17", "17 - 77", "77 – 209", "209 – 458", 
+                       paste("458 –", round(max(grid_2011$ludn_grid_2011), 0))
+                       ),
+            title = "Estymowana liczba ludności",
+            position = "bottomright") %>%
   fitBounds(bbox[1], bbox[2], bbox[3], bbox[4])
 ```
 
+# O mapie {orientation="columns" scrolling="false"}
 
-# O mapie {orientation="columns"}
-
-##
+## 
 
 Prezentowane mapy rozmieszczenia ludności w siatce 100 m oparte są na wynikach estymacji liczby ludności, zrealizowanych w ramach pracy inżynierskiej *Ocena możliwości opracowywania szczegółowych map rozmieszczenia ludności w oparciu o dane topograficzne o budynkach*. Opierając się na metodyce Całki i in. (2017), obliczono szacunkowe liczby mieszkańców pojedynczych budynków mieszkalnych, które następnie zagregowano do oczek siatki.
 
@@ -129,11 +132,10 @@ Prezentowane mapy rozmieszczenia ludności w siatce 100 m oparte są na wynikach
 
 ------------------------------------------------------------------------
 
-**Bibliografia:**
-Całka, B., Nowak Da Costa, J., & Bielecka, E. (2017). Fine scale population density data and its application in risk assessment. *Geomatics, Natural Hazards and Risk*, 8(2), 1440–1455. <https://doi.org/10.1080/19475705.2017.1345792>
+**Bibliografia:** Całka, B., Nowak Da Costa, J., & Bielecka, E. (2017). Fine scale population density data and its application in risk assessment. *Geomatics, Natural Hazards and Risk*, 8(2), 1440–1455. <https://doi.org/10.1080/19475705.2017.1345792>
 
 ------------------------------------------------------------------------
 
 ## 
 
-Tu będzie poster
+![Poster na Wydziałowy Konkurs Prac Inżynierskich](data/poster.png)
