@@ -64,9 +64,9 @@ bbox = gminy %>%
 #| padding: 0px
 
 grid_2021 %>%
-  leaflet(options = leafletOptions(minZoom = 10)) %>%
-  addTiles(urlTemplate = "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
-           attribution = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>') %>%
+  leaflet(options = leafletOptions(minZoom = 10, maxZoom = 16)) %>%
+  addTiles(urlTemplate = "https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}",
+           attribution = 'Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ') %>%
   addPolygons(data = grid_2021,
               color = "black",
               weight = 0.1,
@@ -79,14 +79,26 @@ grid_2021 %>%
               fill = FALSE,
               color = "black",
               opacity = 1,
-              weight = 1) %>%
+              weight = 1,
+              label = ~NAZWA,
+              labelOptions = labelOptions(
+                noHide = TRUE,
+                direction = "center",
+                textOnly = TRUE,
+                style = list(
+                  "color" = "black",
+                  "font-weight" = "bold",
+                  "font-size" = "10px"
+                )
+              )) %>%
   addLegend(colors = rev(pal),
             labels = c("3 – 17", "17 - 77", "77 – 209", "209 – 458", 
                        paste("458 –", round(max(grid_2021$ludn_grid), 0))
                        ),
             title = "Estymowana liczba ludności",
             position = "bottomright") %>%
-  fitBounds(bbox[1], bbox[2], bbox[3], bbox[4])
+  fitBounds(bbox[1], bbox[2], bbox[3], bbox[4]) %>%
+  setMaxBounds(bbox[1], bbox[2], bbox[3], bbox[4])
 ```
 
 ```{r}
@@ -95,9 +107,9 @@ grid_2021 %>%
 #| padding: 0px
 
 grid_2011 %>%
-  leaflet(options = leafletOptions(minZoom = 10)) %>%
-  addTiles(urlTemplate = "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
-           attribution = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>') %>%
+  leaflet(options = leafletOptions(minZoom = 10, maxZoom = 16)) %>%
+  addTiles(urlTemplate = "https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}",
+           attribution = 'Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ') %>%
   addPolygons(data = grid_2011,
               color = "black",
               weight = 0.1,
@@ -110,14 +122,26 @@ grid_2011 %>%
               fill = FALSE,
               color = "black",
               opacity = 1,
-              weight = 1) %>%
+              weight = 1,
+              label = ~NAZWA,
+              labelOptions = labelOptions(
+                noHide = TRUE,
+                direction = "center",
+                textOnly = TRUE,
+                style = list(
+                  "color" = "black",
+                  "font-weight" = "bold",
+                  "font-size" = "10px"
+                )
+              )) %>%
   addLegend(colors = rev(pal),
             labels = c("3 – 17", "17 - 77", "77 – 209", "209 – 458", 
                        paste("458 –", round(max(grid_2011$ludn_grid_2011), 0))
                        ),
             title = "Estymowana liczba ludności",
             position = "bottomright") %>%
-  fitBounds(bbox[1], bbox[2], bbox[3], bbox[4])
+  fitBounds(bbox[1], bbox[2], bbox[3], bbox[4]) %>%
+  setMaxBounds(bbox[1], bbox[2], bbox[3], bbox[4])
 ```
 
 # O mapie {orientation="columns" scrolling="false"}
